@@ -24,7 +24,35 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		}
 		
 	}
-
+	
+	public void validacaoCamposObrigatorios(PlanoVoo planoVoo) throws Exception{
+		if(planoVoo.getPlanetaDestino() == null){
+			throw new Exception("Favor informar um Planeta!");
+		}
+		if(planoVoo.getNaveEspacial() == null){
+			throw new Exception("Favor informar uma Nave Espacial!");
+		}		
+		if(planoVoo.getListaTripulante() == null || planoVoo.getListaTripulante().size() == 0 ){
+			throw new Exception("Favor informar pelo menos 1 Tripulante!");
+		}
+		
+	}
+	
+	public void validacaoRegraDeNegocio(PlanoVoo planoVoo) throws Exception{		
+		
+		if(planoVoo.getListaTripulante().size() > planoVoo.getNaveEspacial().getPassengers().intValue() ){
+			throw new Exception("A quantidade de Tripulante não pode exceder a capacidade da Nave Espacial!");
+		}
+	}
+	public void buscarUltimoPlanoDeVoo(PlanoVoo planoVoo) {
+		if(planoVoo.getCodigo() == null){
+			List<PlanoVoo> lista = buscarTodos();
+			if(lista!=null && lista.size() > 0){
+				
+			}
+		}
+		
+	}
 	public PlanoVooDAO getPlanoVooDAO() {
 		return planoVooDAO;
 	}
