@@ -1,10 +1,11 @@
 package br.com.imperiogalatico.trafegoespacial.dao.contract;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 
-public interface PlanoVooDAO {
+public interface PlanoVooDAO  extends Serializable{
 
 	void adicionar(PlanoVoo planoDeVoo);
 

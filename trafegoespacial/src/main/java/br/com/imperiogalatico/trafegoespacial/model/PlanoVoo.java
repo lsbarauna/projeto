@@ -1,9 +1,10 @@
 package br.com.imperiogalatico.trafegoespacial.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanoVoo {
+public class PlanoVoo implements Serializable{
 	private Nave naveEspacial;
 	private Planeta planetaDestino;
 	private List<Tripulante> listaTripulante;

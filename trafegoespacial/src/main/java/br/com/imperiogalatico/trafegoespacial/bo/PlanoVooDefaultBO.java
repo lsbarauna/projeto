@@ -2,17 +2,20 @@ package br.com.imperiogalatico.trafegoespacial.bo;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import br.com.imperiogalatico.trafegoespacial.bo.contract.PlanoVooBO;
-import br.com.imperiogalatico.trafegoespacial.dao.PlanoVooMemoryDAO;
 import br.com.imperiogalatico.trafegoespacial.dao.contract.PlanoVooDAO;
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 
 public class PlanoVooDefaultBO implements PlanoVooBO{
+	
+	@Inject
 	private PlanoVooDAO planoVooDAO;	
 	
 
 	public PlanoVooDefaultBO() {
-		planoVooDAO = new PlanoVooMemoryDAO();
 	}
 
 	@Override

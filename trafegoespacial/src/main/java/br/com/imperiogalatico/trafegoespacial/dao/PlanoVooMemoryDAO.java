@@ -3,6 +3,8 @@ package br.com.imperiogalatico.trafegoespacial.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import br.com.imperiogalatico.trafegoespacial.dao.contract.PlanoVooDAO;
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 

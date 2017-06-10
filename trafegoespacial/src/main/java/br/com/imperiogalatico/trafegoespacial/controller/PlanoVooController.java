@@ -1,33 +1,42 @@
 package br.com.imperiogalatico.trafegoespacial.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import br.com.imperiogalatico.trafegoespacial.bo.NaveDefaultBO;
-import br.com.imperiogalatico.trafegoespacial.bo.PlanetaDefaultBO;
-import br.com.imperiogalatico.trafegoespacial.bo.PlanoVooDefaultBO;
-import br.com.imperiogalatico.trafegoespacial.bo.SwapiDefaultBO;
-import br.com.imperiogalatico.trafegoespacial.bo.TripulanteDefaultBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.NaveBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.PlanetaBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.PlanoVooBO;
-import br.com.imperiogalatico.trafegoespacial.bo.contract.SwapiBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.TripulanteBO;
 import br.com.imperiogalatico.trafegoespacial.model.Nave;
 import br.com.imperiogalatico.trafegoespacial.model.Planeta;
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 import br.com.imperiogalatico.trafegoespacial.model.Tripulante;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class PlanoVooController {
+public class PlanoVooController implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Inject
 	private PlanetaBO planetaBO;
+	
+	@Inject
 	private NaveBO naveBO;
-	private TripulanteBO tripulanteBO;	
+	
+	@Inject
+	private TripulanteBO tripulanteBO;
+	
+	@Inject
 	private PlanoVooBO planoVooBO;
 	
 	private List<Planeta> listaPlaneta;
@@ -41,13 +50,11 @@ public class PlanoVooController {
 	private PlanoVoo planoVoo;
 	private PlanoVoo planoVooDetalhe;
 	
-	public PlanoVooController() {
-		planetaBO = new PlanetaDefaultBO() ;
-		naveBO = new NaveDefaultBO();
-		tripulanteBO = new TripulanteDefaultBO();
+	@PostConstruct
+	public void iniciarCombos(){
+		
 		nave = new Nave();
 		planeta = new Planeta();
-		planoVooBO = new PlanoVooDefaultBO();
 		planoVoo = planoVooBO.buscarPorCodigo(new PlanoVoo(2L));
 		if(planoVoo == null){
 			planoVoo = new PlanoVoo();
@@ -57,11 +64,7 @@ public class PlanoVooController {
 			listaTripulanteSelected = planoVoo.getListaTripulante();
 		}
 		
-
-	}
-	
-	@PostConstruct
-	public void iniciarCombos(){
+		
 		listaPlaneta = planetaBO.listar();
 		listaNave = naveBO.listar();		
 		listaTripulante = tripulanteBO.listar();
@@ -124,7 +127,7 @@ public class PlanoVooController {
 	
 	public String excluir() {
 		planoVooBO.excluir(listaPlanoSelected);
-		return "manterPlanoVoo";
+		return null;
 	}
 	
 	public PlanoVoo getPlanoVooDetalhe() {

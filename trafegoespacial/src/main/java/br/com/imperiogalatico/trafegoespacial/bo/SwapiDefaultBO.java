@@ -2,6 +2,9 @@ package br.com.imperiogalatico.trafegoespacial.bo;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import br.com.imperiogalatico.trafegoespacial.bo.contract.SwapiBO;
 import br.com.imperiogalatico.trafegoespacial.model.Nave;
 import br.com.imperiogalatico.trafegoespacial.model.Planeta;
@@ -10,12 +13,9 @@ import br.com.imperiogalatico.trafegoespacial.service.client.SwapiClient;
 
 public class SwapiDefaultBO implements SwapiBO {
 
+	@Inject
 	private SwapiClient swapiClient;
 	
-	public SwapiDefaultBO(){
-		swapiClient =  new SwapiClient();
-	}
-
 	@Override
 	public List<Planeta> listarPlaneta(String url) {
 		return swapiClient.listarPlaneta(url);
