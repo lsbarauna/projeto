@@ -15,8 +15,8 @@
 			<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
 
 				<p:outputLabel for="planeta" value="Paneta:" />
-				<p:selectOneMenu converter="planetaConverter" id="planeta" style="width:125px" value="#{planoVooController.planeta.url}">
-					<f:selectItems value="#{planoVooController.listaPlaneta}" var="planeta" itemLabel="#{planeta.name}" itemValue="#{planeta.url}" />
+				<p:selectOneMenu converter="planetaConverter" id="planeta" style="width:125px" value="#{planoVooController.planeta}">
+					<f:selectItems value="#{planoVooController.listaPlaneta}" var="planeta" itemLabel="#{planeta.name}" itemValue="#{planeta}" />
 			
 				</p:selectOneMenu>
 

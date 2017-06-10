@@ -1,4 +1,6 @@
 package br.com.imperiogalatico.trafegoespacial.converter;
+
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;

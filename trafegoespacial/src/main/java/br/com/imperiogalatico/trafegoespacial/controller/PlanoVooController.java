@@ -3,10 +3,7 @@ package br.com.imperiogalatico.trafegoespacial.controller;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-
-import org.primefaces.model.DualListModel;
 
 import br.com.imperiogalatico.trafegoespacial.bo.SwapiDefaultBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.SwapiBO;
