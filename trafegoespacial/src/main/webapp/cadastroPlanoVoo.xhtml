@@ -9,23 +9,30 @@
 		<h1 class="aw-page-title">Cadastro de Plano de Voo</h1>
 
 		<h:form id="form">
-  
+  			<p:growl id="growl" showDetail="true" sticky="true" />  
 			<p:messages autoUpdate="true" />
 
 			<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
 
 				<p:outputLabel for="planeta" value="Paneta:" />
-				<p:selectOneMenu id="planeta" style="width:125px" value="#{planoVooController.planeta.url}">
-					<f:selectItems value="#{planoVooController.listaPlaneta}" var="planeta" itemLabel="#{planeta.name}" itemValue="#{planeta.url}" />
-			
+				<p:selectOneMenu id="planeta" style="width:150px"
+					value="#{planoVooController.planeta.url}" filter="true" filterMatchMode="startsWith">
+					<f:selectItems value="#{planoVooController.listaPlaneta}"
+						var="planeta" itemLabel="#{planeta.name}"
+						itemValue="#{planeta.url}" />
+
+					
+
 				</p:selectOneMenu>
 
 				<p:outputLabel for="nave" value="Nave:" />
-				<p:selectOneMenu style="width:125px" id="nave" value="#{planoVooController.nave.url}">
-						<f:selectItems value="#{planoVooController.listaNave}" var="nave" itemLabel="#{nave.name}" itemValue="#{nave.url}" />
-			
+				<p:selectOneMenu style="width:200px" id="nave"
+					value="#{planoVooController.nave.url}" filter="true" filterMatchMode="startsWith">
+					<f:selectItems value="#{planoVooController.listaNave}" var="nave"
+						itemLabel="#{nave.name}" itemValue="#{nave.url}" />
+
 				</p:selectOneMenu>
-			
+
 
 			</h:panelGrid>
 			<h:panelGrid columns="10" style="margin-bottom:10px" cellpadding="5">
@@ -49,6 +56,9 @@
 
 			<p:commandButton value="Salvar" process="@this,@form,form:planeta"
 				action="#{planoVooController.salvar}" icon="ui-icon-check" />
+				
+				<p:commandButton value="Voltar" 
+				action="manterPlanoVoo" icon="ui-icon-arrowrefresh-1-w" />
 
 		</h:form>
 	</ui:define>

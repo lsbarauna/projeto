@@ -1,5 +1,6 @@
 package br.com.imperiogalatico.trafegoespacial.bo;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,7 +18,9 @@ public class TripulanteDefaultBO implements TripulanteBO{
 
 	@Override
 	public List<Tripulante> listar() {
-		return swapi.listarTripulante(Constantes.URL_TRIPULANTE);
+		List<Tripulante> lista = swapi.listarTripulante(Constantes.URL_TRIPULANTE);
+		ordernar(lista);
+		return lista;
 	}
 
 	@Override
@@ -27,6 +30,16 @@ public class TripulanteDefaultBO implements TripulanteBO{
 			tripulanteRetorno = swapi.buscarTripulante(tripulante.getUrl());
 		}
 		return tripulanteRetorno;
+	}
+	
+	public void ordernar(List<Tripulante> lista) {
+		lista.sort(new Comparator<Tripulante>() {
+			@Override
+			public int compare(Tripulante o1, Tripulante o2) {
+				return o1.getName().compareTo(o2.getName());
+				
+			}
+		});
 	}
 
 }

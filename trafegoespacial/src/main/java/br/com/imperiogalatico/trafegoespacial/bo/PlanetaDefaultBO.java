@@ -1,5 +1,6 @@
 package br.com.imperiogalatico.trafegoespacial.bo;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,7 +22,9 @@ public class PlanetaDefaultBO implements PlanetaBO{
 
 	@Override
 	public List<Planeta> listar() {
-		return swapi.listarPlaneta(Constantes.URL_PLANETA);
+		List<Planeta> lista = swapi.listarPlaneta(Constantes.URL_PLANETA);
+		ordernar(lista);
+		return lista;
 	}
 
 	@Override
@@ -31,6 +34,16 @@ public class PlanetaDefaultBO implements PlanetaBO{
 			planetaRetorno = swapi.buscarPlaneta(planeta.getUrl());
 		}
 		return planetaRetorno;
+	}
+	
+	public void ordernar(List<Planeta> lista) {
+		lista.sort(new Comparator<Planeta>() {
+			@Override
+			public int compare(Planeta o1, Planeta o2) {
+				return o1.getName().compareTo(o2.getName());
+				
+			}
+		});
 	}
 
 }

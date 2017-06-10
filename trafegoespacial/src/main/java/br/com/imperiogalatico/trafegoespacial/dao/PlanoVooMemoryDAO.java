@@ -63,8 +63,20 @@ public class PlanoVooMemoryDAO implements PlanoVooDAO {
 		listaPlanoDeVoo = new ArrayList<PlanoVoo>();
 		
 	}
+	
+	
 
 	
+	@Override
+	public void atualizar(PlanoVoo planoDeVoo) {
+		int indice = listaPlanoDeVoo.indexOf(planoDeVoo);
+		if(indice > -1){
+			listaPlanoDeVoo.set(indice,planoDeVoo);
+		}
+		
+	}
+
+
 	/* (non-Javadoc)
 	 * @see br.com.imperiogalatico.trafegoespacial.persistence.PlanoDeVoo#getSeqPlanoDeVooNextVal()
 	 */

@@ -8,6 +8,8 @@ import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 public interface PlanoVooDAO  extends Serializable{
 
 	void adicionar(PlanoVoo planoDeVoo);
+	
+	void atualizar(PlanoVoo planoDeVoo);
 
 	PlanoVoo buscarPorChave(PlanoVoo chave);
 

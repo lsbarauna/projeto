@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -122,11 +124,18 @@ public class PlanoVooController implements Serializable {
 		}
 		
 		planoVooBO.salvar(planoVoo);
+		saveMessage("registro cadastrado com sucesso!");
 		return "manterPlanoVoo";
 	}
+	public void saveMessage(String mensagem) {
+        FacesContext context = FacesContext.getCurrentInstance();         
+        context.addMessage(null, new FacesMessage("Sucesso",  mensagem) );
+    }
+	
 	
 	public String excluir() {
 		planoVooBO.excluir(listaPlanoSelected);
+		saveMessage("registro(s) excluído(s) com sucesso!");
 		return null;
 	}
 	

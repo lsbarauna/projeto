@@ -16,7 +16,7 @@ public class Tripulante implements Serializable {
     
     public String url;
     
-    
+   
 	public String getUrl() {
 		return url;
 	}
