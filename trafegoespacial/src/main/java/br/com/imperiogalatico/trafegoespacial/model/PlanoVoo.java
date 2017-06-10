@@ -10,7 +10,10 @@ public class PlanoVoo {
 	private Long codigo;	
 	
 	
-	
+	public PlanoVoo(Long codigo) {
+		super();
+		this.codigo = codigo;
+	}
 	public PlanoVoo() {
 		listaTripulante = new ArrayList<Tripulante>();
 	}

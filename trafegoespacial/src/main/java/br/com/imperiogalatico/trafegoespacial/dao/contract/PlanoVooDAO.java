@@ -17,5 +17,7 @@ public interface PlanoVooDAO {
 	long getSeqPlanoDeVooNextVal();
 	
 	void excluir(List<PlanoVoo> listaPlanoSelected);
+	
+	PlanoVoo buscarPorCodigo(PlanoVoo planoVoo);
 
 }

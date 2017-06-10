@@ -47,6 +47,10 @@ public class PlanoVooMemoryDAO implements PlanoVooDAO {
 		}
 		
 	}
+	
+	public PlanoVoo buscarPorCodigo(PlanoVoo chave) {
+		return listaPlanoDeVoo.stream().filter(planoVoo -> planoVoo.equals(chave)).findAny().orElse(null);
+	}
 
 	
 	/* (non-Javadoc)

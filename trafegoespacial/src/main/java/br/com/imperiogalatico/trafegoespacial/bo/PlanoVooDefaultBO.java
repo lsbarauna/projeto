@@ -8,8 +8,7 @@ import br.com.imperiogalatico.trafegoespacial.dao.contract.PlanoVooDAO;
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 
 public class PlanoVooDefaultBO implements PlanoVooBO{
-	private PlanoVooDAO planoVooDAO;
-	
+	private PlanoVooDAO planoVooDAO;	
 	
 
 	public PlanoVooDefaultBO() {
@@ -21,6 +20,14 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		planoVooDAO.adicionar(planoVoo);
 	}
 
+	public PlanoVooDAO getPlanoVooDAO() {
+		return planoVooDAO;
+	}
+
+	public void setPlanoVooDAO(PlanoVooDAO planoVooDAO) {
+		this.planoVooDAO = planoVooDAO;
+	}
+
 	@Override
 	public List<PlanoVoo> buscarTodos() {
 		return planoVooDAO.buscarTodos();
@@ -30,6 +37,12 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 	public void excluir(List<PlanoVoo> listaPlanoSelected) {
 		planoVooDAO.excluir(listaPlanoSelected);
 		
+	}
+
+	@Override
+	public PlanoVoo buscarPorCodigo(PlanoVoo planoVoo) {
+		// TODO Auto-generated method stub
+		return planoVooDAO.buscarPorChave(planoVoo);
 	}
 	
 	

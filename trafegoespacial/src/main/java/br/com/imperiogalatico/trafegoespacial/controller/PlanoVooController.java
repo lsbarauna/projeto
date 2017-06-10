@@ -1,5 +1,6 @@
 package br.com.imperiogalatico.trafegoespacial.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -47,7 +48,15 @@ public class PlanoVooController {
 		nave = new Nave();
 		planeta = new Planeta();
 		planoVooBO = new PlanoVooDefaultBO();
-		planoVoo = new PlanoVoo();
+		planoVoo = planoVooBO.buscarPorCodigo(new PlanoVoo(2L));
+		if(planoVoo == null){
+			planoVoo = new PlanoVoo();
+		}else{
+			planeta = planoVoo.getPlanetaDestino();
+			nave = planoVoo.getNaveEspacial();
+			listaTripulanteSelected = planoVoo.getListaTripulante();
+		}
+		
 
 	}
 	
@@ -92,7 +101,11 @@ public class PlanoVooController {
 		return null;
 	}
 	public String salvar() {
-		planoVoo = new PlanoVoo();
+		if(planoVoo == null || planoVoo.getCodigo() == null){
+			planoVoo = new PlanoVoo();
+		}else{
+			planoVoo.setListaTripulante(new ArrayList<Tripulante>());
+		}
 		
 		Planeta lPlaneta = planetaBO.buscarPorUrl(planeta);
 		Nave lNave = naveBO.buscarPorUrl(nave);

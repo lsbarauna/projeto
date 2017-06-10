@@ -30,10 +30,18 @@
 				    </p:column>
 				    
 				    <p:column style="width:32px;text-align: center">
-			             <p:commandButton update="form:idcarDialog"  process="singleDT" action="#{planoVooController.detalhe}"  oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+			             <p:commandButton update="form:idcarDialog"  process="singleDT" action="#{planoVooController.detalhe}"  oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="detalhar">
 			                <f:setPropertyActionListener value="#{plano}" target="#{planoVooController.planoVooDetalhe}" />
 			            </p:commandButton>
 			        </p:column>
+			        
+			        <p:column style="width:32px;text-align: center">
+			             <p:commandButton update="form:idcarDialog"  process="singleDT" action="#{planoVooController.editar}"  icon="ui-icon-pencil" title="Editar">
+			                <f:setPropertyActionListener value="#{plano}" target="#{planoVooController.planoVoo}" />
+			            </p:commandButton>
+			        </p:column>
+			        
+			         
 				</p:dataTable>
 
 
@@ -41,12 +49,9 @@
 			<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
 
 				<p:commandButton value="Excluir" update="singleDT"
-					action="#{planoVooController.excluir}" icon="ui-icon-check" />
+					action="#{planoVooController.excluir}" icon="ui-icon-trash" />
 				<p:commandButton value="Novo" action="#{planoVooController.editar}"
 					icon="ui-icon-check" />
-					<p:commandButton value="Editar" action="#{planoVooController.editar}"
-					icon="ui-icon-check" />
-
 			</h:panelGrid>
 
 		<p:dialog header="Plano de Voo" widgetVar="carDialog" id="idcarDialog" modal="true"  resizable="false">
