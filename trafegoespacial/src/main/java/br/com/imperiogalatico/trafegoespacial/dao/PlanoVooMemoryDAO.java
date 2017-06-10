@@ -17,6 +17,7 @@ public class PlanoVooMemoryDAO implements PlanoVooDAO {
 	 */
 	@Override
 	public void adicionar(PlanoVoo planoDeVoo){
+		planoDeVoo.setCodigo(getSeqPlanoDeVooNextVal());
 		listaPlanoDeVoo.add( planoDeVoo);
 	}
 		
@@ -36,6 +37,15 @@ public class PlanoVooMemoryDAO implements PlanoVooDAO {
 	@Override
 	public List<PlanoVoo> buscarTodos(){
 			return listaPlanoDeVoo;
+	}
+	
+	public void excluir(List<PlanoVoo> listaPlanoSelected) {
+		if(listaPlanoSelected != null && listaPlanoSelected.size() > 0){
+			for(PlanoVoo planoVoo:listaPlanoSelected){
+				listaPlanoDeVoo.remove(planoVoo);
+			}
+		}
+		
 	}
 
 	

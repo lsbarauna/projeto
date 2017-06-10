@@ -19,56 +19,106 @@ import br.com.imperiogalatico.trafegoespacial.model.Tripulante;
 public class SwapiClient {
 
 	
-	public List<Planeta> listarPlaneta() {
+	public List<Planeta> listarPlaneta(String url) {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("User-Agent", "JAVA-APPLICATION");
 
 		RestTemplate restTemplate = new RestTemplate();
+		
+		 ResponseEntity<Models<Planeta>> res = restTemplate.exchange(
+	        		url,
+	                HttpMethod.GET,
+	                new HttpEntity<String>(headers),
+	                new ParameterizedTypeReference<Models<Planeta>>() {});
+		return res.getBody().results;
 
-        ResponseEntity<Models<Planeta>> res = restTemplate.exchange(
-        		"http://swapi.co/api/planets/",
-                HttpMethod.GET,
-                new HttpEntity<String>(headers),
-                new ParameterizedTypeReference<Models<Planeta>>() {});
+	}
+
+	public List<Tripulante> listarTripulante(String url) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("User-Agent", "JAVA-APPLICATION");
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		 ResponseEntity<Models<Tripulante>> res = restTemplate.exchange(
+	        		url,
+	                HttpMethod.GET,
+	                new HttpEntity<String>(headers),
+	                new ParameterizedTypeReference<Models<Tripulante>>() {});
 
 		return res.getBody().results;
 
 	}
 
-	public List<Tripulante> listarTripulante() {
+	public List<Nave> listarNave(String url) {
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("User-Agent", "JAVA-APPLICATION");
 
 		RestTemplate restTemplate = new RestTemplate();
-
-        ResponseEntity<Models<Tripulante>> res = restTemplate.exchange(
-        		"http://swapi.co/api/people/",
-                HttpMethod.GET,
-                new HttpEntity<String>(headers),
-                new ParameterizedTypeReference<Models<Tripulante>>() {});
+		
+		 ResponseEntity<Models<Nave>> res = restTemplate.exchange(
+				    url,
+	                HttpMethod.GET,
+	                new HttpEntity<String>(headers),
+	                new ParameterizedTypeReference<Models<Nave>>() {});
 
 		return res.getBody().results;
+	}
+	
+	public Nave buscarNave(String url) {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("User-Agent", "JAVA-APPLICATION");
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		 ResponseEntity<Nave> res = restTemplate.exchange(
+				    url,
+	                HttpMethod.GET,
+	                new HttpEntity<String>(headers),
+	                new ParameterizedTypeReference<Nave>() {});
+
+		return res.getBody();
+	}
+	
+	public Planeta buscarPlaneta(String url) {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("User-Agent", "JAVA-APPLICATION");
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		 ResponseEntity<Planeta> res = restTemplate.exchange(
+	        		url,
+	                HttpMethod.GET,
+	                new HttpEntity<String>(headers),
+	                new ParameterizedTypeReference<Planeta>() {});
+		return res.getBody();
 
 	}
-
-	public List<Nave> listarNave() {
-
+	
+	public Tripulante buscarTripulante(String url) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("User-Agent", "JAVA-APPLICATION");
 
 		RestTemplate restTemplate = new RestTemplate();
+		
+		 ResponseEntity<Tripulante> res = restTemplate.exchange(
+	        		url,
+	                HttpMethod.GET,
+	                new HttpEntity<String>(headers),
+	                new ParameterizedTypeReference<Tripulante>() {});
 
-        ResponseEntity<Models<Nave>> res = restTemplate.exchange(
-        		"http://swapi.co/api/starships/",
-                HttpMethod.GET,
-                new HttpEntity<String>(headers),
-                new ParameterizedTypeReference<Models<Nave>>() {});
+		return res.getBody();
 
-		return res.getBody().results;
 	}
 
 }

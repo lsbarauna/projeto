@@ -17,18 +17,34 @@ public class SwapiDefaultBO implements SwapiBO {
 	}
 
 	@Override
-	public List<Planeta> listarPlaneta() {
-		return swapiClient.listarPlaneta();
+	public List<Planeta> listarPlaneta(String url) {
+		return swapiClient.listarPlaneta(url);
 	}
 
 	@Override
-	public List<Tripulante> listarTripulante() {
-		return swapiClient.listarTripulante();
+	public List<Tripulante> listarTripulante(String url) {
+		return swapiClient.listarTripulante(url);
 	}
 
 	@Override
-	public List<Nave> listarNave() {
-		return swapiClient.listarNave();
+	public List<Nave> listarNave(String url) {
+		return swapiClient.listarNave(url);
 	}
+	
+	@Override
+	public Nave buscarNave(String url) {
+		return swapiClient.buscarNave(url);
+	}
+
+	@Override
+	public Planeta buscarPlaneta(String url) {
+		return swapiClient.buscarPlaneta(url);
+	}
+
+	@Override
+	public Tripulante buscarTripulante(String url) {
+		return  swapiClient.buscarTripulante(url);
+	}
+	
 	
 }

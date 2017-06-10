@@ -1,5 +1,6 @@
 package br.com.imperiogalatico.trafegoespacial.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanoVoo {
@@ -8,6 +9,11 @@ public class PlanoVoo {
 	private List<Tripulante> listaTripulante;
 	private Long codigo;	
 	
+	
+	
+	public PlanoVoo() {
+		listaTripulante = new ArrayList<Tripulante>();
+	}
 	public Long getCodigo() {
 		return codigo;
 	}

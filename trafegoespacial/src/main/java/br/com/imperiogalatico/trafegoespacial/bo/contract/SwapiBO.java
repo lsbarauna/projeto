@@ -8,8 +8,14 @@ import br.com.imperiogalatico.trafegoespacial.model.Tripulante;
 
 public interface SwapiBO {
 
-	public List<Planeta> listarPlaneta();
-	public List<Tripulante> listarTripulante();
-	public List<Nave> listarNave();
+	public List<Planeta> listarPlaneta(String url);
+	public List<Tripulante> listarTripulante(String url);
+	public List<Nave> listarNave(String url);
+	
+	public Nave buscarNave(String url) ;
+	public Planeta buscarPlaneta(String url);
+	public Tripulante buscarTripulante(String url);
+	
+	
 	
 }

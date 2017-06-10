@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/Layout.xhtml">
 
-	<ui:define name="content">
+	<ui:define name="content"> 
 		<h1 class="aw-page-title">Cadastro de Plano de Voo</h1>
 
 		<h:form id="form">
@@ -13,26 +13,25 @@
 			<p:messages autoUpdate="true" />
 
 			<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
-				<p:dataTable var="plano" id="singleDT" value="#{planoVooController.listaPlanoVoo}" selection="#{planoVooController.listaPlanoSelected}" rowKey="#{plano.codigo}" >
-				<f:facet name="header">
-            Checkbox  
-        </f:facet>
+				<p:dataTable var="plano" id="singleDT" value="#{planoVooController.listaPlanoVoo}" 
+				selection="#{planoVooController.listaPlanoSelected}" rowKey="#{plano.codigo}" >
+				<f:facet name="header">Plano de Voo</f:facet>
         <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
 				    <p:column headerText="Id">
 				        <h:outputText value="#{plano.codigo}" />
 				    </p:column>
 				 
 				    <p:column headerText="Nave">
-				        <h:outputText value="#{plano.naveEspacial.nome}" />
+				        <h:outputText value="#{plano.naveEspacial.name}" />
 				    </p:column>
 				 
 				    <p:column headerText="Planeta">
-				        <h:outputText value="#{plano.planetaDestino.nome}" />
+				        <h:outputText value="#{plano.planetaDestino.name}" />
 				    </p:column>
 				    
 				    <p:column style="width:32px;text-align: center">
-			             <p:commandButton update=":form:carDetail"  process="singleDT" action="#{planoVooController.salvar}" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
-			                <f:setPropertyActionListener value="#{car}" target="#{planoVooController.planoVoo}" />
+			             <p:commandButton update="form:idcarDialog"  process="singleDT" action="#{planoVooController.detalhe}"  oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+			                <f:setPropertyActionListener value="#{plano}" target="#{planoVooController.planoVooDetalhe}" />
 			            </p:commandButton>
 			        </p:column>
 				</p:dataTable>
@@ -41,7 +40,7 @@
 			</h:panelGrid>
 			<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
 
-				<p:commandButton value="Excluir"
+				<p:commandButton value="Excluir" update="singleDT"
 					action="#{planoVooController.excluir}" icon="ui-icon-check" />
 				<p:commandButton value="Novo" action="#{planoVooController.editar}"
 					icon="ui-icon-check" />
@@ -50,12 +49,12 @@
 
 			</h:panelGrid>
 
-<p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+		<p:dialog header="Car Info" widgetVar="carDialog" id="idcarDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="carDetail" style="text-align:center;">
             <p:panelGrid  columns="2"  columnClasses="label,value">
                
                 <h:outputText value="Id:" />
-                <h:outputText value="#{planoVooController.planoVoo.codigo}" />
+                <h:outputText value="#{planoVooController.planoVooDetalhe.codigo}" />
  
                 <h:outputText value="Year" />
                 <h:outputText value="asas" />

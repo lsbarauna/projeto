@@ -15,5 +15,7 @@ public interface PlanoVooDAO {
 	void limparBase();
 
 	long getSeqPlanoDeVooNextVal();
+	
+	void excluir(List<PlanoVoo> listaPlanoSelected);
 
 }

@@ -24,7 +24,7 @@ public class PlanetaConverter implements Converter {
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) { 
 		String str = ""; 
 		if (arg2 instanceof Planeta) 
-			str = ((Planeta) arg2).getUrl().toString(); 
+			str = ((Planeta) arg2).getUrl(); 
 		
 		System.out.println(">>>>>>>"+arg2);
 		return str; 

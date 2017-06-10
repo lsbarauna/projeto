@@ -11,7 +11,7 @@ public class Nave implements Serializable {
 	public String name;
 	public String model;
 	public Integer passengers;
-	 public String url;
+	public String url;
 	
 	public String getName() {
 		return name;
@@ -30,6 +30,12 @@ public class Nave implements Serializable {
 	}
 	public void setPassengers(Integer passengers) {
 		this.passengers = passengers;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 	
