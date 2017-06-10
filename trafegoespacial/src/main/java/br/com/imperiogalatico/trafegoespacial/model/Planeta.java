@@ -13,6 +13,7 @@ public class Planeta implements Serializable {
     public String climate;
     public String terrain;
     public String population;
+    public String url;
     
 	public String getName() {
 		return name;
@@ -43,6 +44,12 @@ public class Planeta implements Serializable {
 	}
 	public void setPopulation(String population) {
 		this.population = population;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
     
     

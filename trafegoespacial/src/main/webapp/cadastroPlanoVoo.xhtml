@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+	<ui:define name="content">
+		<h1 class="aw-page-title">Cadastro de Plano de Voo</h1>
+
+		<h:form id="form">
+
+			<p:messages autoUpdate="true" />
+
+			<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
+
+				<p:outputLabel for="planeta" value="Paneta:" />
+				<p:selectOneMenu converter="planetaConverter" id="planeta" style="width:125px" value="#{planoVooController.planeta.url}">
+					<f:selectItems value="#{planoVooController.listaPlaneta}" var="planeta" itemLabel="#{planeta.name}" itemValue="#{planeta.url}" />
+			
+				</p:selectOneMenu>
+
+				<p:outputLabel for="nave" value="Nave:" />
+				<p:selectOneMenu style="width:125px" id="nave">
+						<f:selectItems value="#{planoVooController.listaNave}" var="nave" itemLabel="#{nave.name}" itemValue="#{nave}" />
+			
+				</p:selectOneMenu>
+				
+				<p:outputLabel for="tripulante" value="Tripulante:" />
+				<p:selectOneMenu style="width:125px" id="tripulante">
+							<f:selectItems value="#{planoVooController.listaTripulante}" var="tripulante" itemLabel="#{tripulante.name}" itemValue="#{tripulante}" />
+			
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+
+			<p:commandButton value="Salvar" process="@this,@form,form:planeta"
+				action="#{planoVooController.salvar}" icon="ui-icon-check" />
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

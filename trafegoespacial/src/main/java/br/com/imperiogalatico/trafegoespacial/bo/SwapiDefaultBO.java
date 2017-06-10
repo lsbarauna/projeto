@@ -12,7 +12,7 @@ public class SwapiDefaultBO implements SwapiBO {
 
 	private SwapiClient swapiClient;
 	
-	private SwapiDefaultBO(){
+	public SwapiDefaultBO(){
 		swapiClient =  new SwapiClient();
 	}
 

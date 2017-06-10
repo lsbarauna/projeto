@@ -3,10 +3,9 @@ package br.com.imperiogalatico.trafegoespacial.model;
 import java.util.List;
 
 public class PlanoVoo {
-	
-	private Nave starship;
-	private Planeta planet;
-	private List<Tripulante> peoples;
+	private Nave naveEspacial;
+	private Planeta planetaDestino;
+	private List<Tripulante> listaTripulante;
 	private Long codigo;	
 	
 	public Long getCodigo() {
@@ -15,24 +14,23 @@ public class PlanoVoo {
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-	
-	public Nave getStarship() {
-		return starship;
+	public Nave getNaveEspacial() {
+		return naveEspacial;
 	}
-	public void setStarship(Nave starship) {
-		this.starship = starship;
+	public void setNaveEspacial(Nave naveEspacial) {
+		this.naveEspacial = naveEspacial;
 	}
-	public Planeta getPlanet() {
-		return planet;
+	public Planeta getPlanetaDestino() {
+		return planetaDestino;
 	}
-	public void setPlanet(Planeta planet) {
-		this.planet = planet;
+	public void setPlanetaDestino(Planeta planetaDestino) {
+		this.planetaDestino = planetaDestino;
 	}
-	public List<Tripulante> getPeoples() {
-		return peoples;
+	public List<Tripulante> getListaTripulante() {
+		return listaTripulante;
 	}
-	public void setPeoples(List<Tripulante> peoples) {
-		this.peoples = peoples;
+	public void setListaTripulante(List<Tripulante> listaTripulante) {
+		this.listaTripulante = listaTripulante;
 	}
 	@Override
 	public int hashCode() {

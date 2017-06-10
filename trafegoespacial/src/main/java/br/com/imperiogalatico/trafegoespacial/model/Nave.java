@@ -11,6 +11,7 @@ public class Nave implements Serializable {
 	public String name;
 	public String model;
 	public Integer passengers;
+	 public String url;
 	
 	public String getName() {
 		return name;
