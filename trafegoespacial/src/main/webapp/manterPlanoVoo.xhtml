@@ -9,25 +9,25 @@
 		<h1 class="aw-page-title">Cadastro de Plano de Voo</h1>
 
 		<h:form id="form">
-
-			<p:messages autoUpdate="true" />
+			<p:messages autoUpdate="true" showDetail="true" />
 
 			<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
-				<p:dataTable var="plano" id="singleDT" value="#{planoVooController.listaPlanoVoo}" 
+				<p:dataTable var="plano" id="singleDT" value="#{planoVooController.listaPlanoVoo}"  emptyMessage="Nenhum Registro Encontrado" 
 					selection="#{planoVooController.listaPlanoSelected}" rowKey="#{plano.codigo}" >
 					<f:facet name="header">Plano de Voo</f:facet>
        				 <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-				    <p:column headerText="Id">
+				    <p:column headerText="Código" style="width:70px">
 				        <h:outputText value="#{plano.codigo}" />
 				    </p:column>
-				 
-				    <p:column headerText="Nave">
-				        <h:outputText value="#{plano.naveEspacial.name}" />
-				    </p:column>
-				 
-				    <p:column headerText="Planeta">
+				    
+				     <p:column headerText="Planeta" style="width:200px">
 				        <h:outputText value="#{plano.planetaDestino.name}" />
 				    </p:column>
+				 
+				    <p:column headerText="Nave Espacial" style="width:300px">
+				        <h:outputText value="#{plano.naveEspacial.name}" />
+				    </p:column>			 
+				   
 				    
 				    <p:column style="width:32px;text-align: center">
 			             <p:commandButton update="form:idcarDialog"  process="singleDT" action="#{planoVooController.detalhe}"  oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="detalhar">
@@ -55,22 +55,64 @@
 			</h:panelGrid>
 
 		<p:dialog header="Plano de Voo" widgetVar="carDialog" id="idcarDialog" modal="true"  resizable="false">
-	        <p:outputPanel id="carDetail" style="text-align:center;">
+	        <p:outputPanel id="carDetail">
 	            <p:panelGrid  columns="1"  >
 		            <p:panel>
 		                <h:outputText value="Código:" />
 		                <h:outputText value="#{planoVooController.planoVooDetalhe.codigo}" />
 		                
 					 </p:panel>
-				     <p:panel>
-		                 <h:outputText value="Planeta:" />
-		                <h:outputText value="#{planoVooController.planoVooDetalhe.planetaDestino.name}" />
-					 </p:panel>
-					  <p:panel>
-		                 <h:outputText value="Nave:" />
-		                <h:outputText value="#{planoVooController.planoVooDetalhe.naveEspacial.name}" />
-		              </p:panel>
-		               <p:panel>
+				    
+				      	<p:panelGrid >
+				      	 <p:row>
+				      	 	<p:column colspan="2" ><h:outputText value="Planeta" /></p:column>
+				      	 </p:row>
+				      	
+						 <p:row>
+				      	 	<p:column><h:outputText value="Nome:" /> </p:column>
+				      	 	<p:column><h:outputText value="#{planoVooController.planoVooDetalhe.planetaDestino.name}" /> </p:column>
+				      	 	
+				      	 </p:row>
+				      	  <p:row>
+				      	 	<p:column> <h:outputText value="Diâmetro:" /></p:column>
+				      	 	<p:column> <h:outputText value="#{planoVooController.planoVooDetalhe.planetaDestino.diameter}" /></p:column>
+				      	 </p:row>
+				      	  <p:row>
+				      	 	<p:column><h:outputText value="Clima:" /> </p:column>
+				      	 	<p:column> <h:outputText value="#{planoVooController.planoVooDetalhe.planetaDestino.climate}" /></p:column>
+				      	 </p:row>
+				      	  <p:row>
+				      	 	<p:column> <h:outputText value="Terreno:" /></p:column>
+				      	 	<p:column><h:outputText value="#{planoVooController.planoVooDetalhe.planetaDestino.terrain}" /> </p:column>
+				      	 </p:row>
+				      	  <p:row>
+				      	 	<p:column> <h:outputText value="População:" /></p:column>
+				      	 	<p:column><h:outputText value="#{planoVooController.planoVooDetalhe.planetaDestino.population}" /> </p:column>
+				      	 </p:row>
+		                
+		                 </p:panelGrid>
+		                 
+		                 <p:panelGrid >
+					      	 <p:row>
+					      	 	<p:column colspan="2" ><h:outputText value="Nave Espacial" /></p:column>
+					      	 </p:row>
+					      	
+							 <p:row>
+					      	 	<p:column><h:outputText value="Nome:" /></p:column>
+					      	 	<p:column><h:outputText value="#{planoVooController.planoVooDetalhe.naveEspacial.name}" /> </p:column>					      	 	
+					      	 </p:row>
+					      	 <p:row>
+					      	 	<p:column><h:outputText value="Modelo:" /></p:column>
+					      	 	<p:column><h:outputText value="#{planoVooController.planoVooDetalhe.naveEspacial.model}" /> </p:column>					      	 	
+					      	 </p:row>
+					      	 <p:row>
+					      	 	<p:column><h:outputText value="Passageiros:" /></p:column>
+					      	 	<p:column><h:outputText value="#{planoVooController.planoVooDetalhe.naveEspacial.passengers}" /> </p:column>					      	 	
+					      	 </p:row>
+				      	 </p:panelGrid>
+					 
+					
+		             
 			               <p:dataTable var="tripulante" id="singleDetalhe"  style="max-width: 500px; min-width: 500px"
 			                	value="#{planoVooController.planoVooDetalhe.listaTripulante}" >				
 			        			 <f:facet name="header">Tripulantes</f:facet>
@@ -83,7 +125,7 @@
 							    </p:column>					    
 							    
 							</p:dataTable>
-		                </p:panel>
+		              
 	            </p:panelGrid>
 	        </p:outputPanel>
 	    </p:dialog>

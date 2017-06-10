@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.imperiogalatico.trafegoespacial.bo.NaveDefaultBO;
 import br.com.imperiogalatico.trafegoespacial.bo.PlanetaDefaultBO;
 import br.com.imperiogalatico.trafegoespacial.bo.PlanoVooDefaultBO;
-import br.com.imperiogalatico.trafegoespacial.bo.SwapiDefaultBO;
 import br.com.imperiogalatico.trafegoespacial.bo.TripulanteDefaultBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.NaveBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.PlanetaBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.PlanoVooBO;
-import br.com.imperiogalatico.trafegoespacial.bo.contract.SwapiBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.TripulanteBO;
 import br.com.imperiogalatico.trafegoespacial.model.Nave;
 import br.com.imperiogalatico.trafegoespacial.model.Planeta;
@@ -119,11 +119,18 @@ public class PlanoVooController {
 		}
 		
 		planoVooBO.salvar(planoVoo);
+		saveMessage("registro cadastrado com sucesso!");
 		return "manterPlanoVoo";
 	}
+	public void saveMessage(String mensagem) {
+        FacesContext context = FacesContext.getCurrentInstance();         
+        context.addMessage(null, new FacesMessage("Sucesso",  mensagem) );
+    }
+	
 	
 	public String excluir() {
 		planoVooBO.excluir(listaPlanoSelected);
+		saveMessage("registro(s) excluído(s) com sucesso!");
 		return "manterPlanoVoo";
 	}
 	

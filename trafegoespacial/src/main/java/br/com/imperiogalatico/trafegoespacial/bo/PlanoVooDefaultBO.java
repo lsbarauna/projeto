@@ -17,7 +17,12 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 
 	@Override
 	public void salvar(PlanoVoo planoVoo) {
-		planoVooDAO.adicionar(planoVoo);
+		if(planoVoo != null && planoVoo.getCodigo() != null){
+			planoVooDAO.atualizar(planoVoo); 
+		}else{
+			planoVooDAO.adicionar(planoVoo);
+		}
+		
 	}
 
 	public PlanoVooDAO getPlanoVooDAO() {
@@ -41,7 +46,6 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 
 	@Override
 	public PlanoVoo buscarPorCodigo(PlanoVoo planoVoo) {
-		// TODO Auto-generated method stub
 		return planoVooDAO.buscarPorChave(planoVoo);
 	}
 	

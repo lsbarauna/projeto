@@ -1,5 +1,6 @@
 package br.com.imperiogalatico.trafegoespacial.bo;
 
+import java.util.Comparator;
 import java.util.List;
 
 import br.com.imperiogalatico.trafegoespacial.bo.contract.NaveBO;
@@ -18,7 +19,9 @@ public class NaveDefaultBO implements NaveBO{
 
 	@Override
 	public List<Nave> listar() {
-		return swapi.listarNave(Constantes.URL_NAVE);
+		List<Nave> lista = swapi.listarNave(Constantes.URL_NAVE);
+		ordernar(lista);
+		return  lista;
 	}
 
 	@Override
@@ -28,6 +31,16 @@ public class NaveDefaultBO implements NaveBO{
 			naveRetorno = swapi.buscarNave(nave.getUrl());
 		}
 		return naveRetorno;
+	}
+	
+	public void ordernar(List<Nave> lista) {
+		lista.sort(new Comparator<Nave>() {
+			@Override
+			public int compare(Nave o1, Nave o2) {
+				return o1.getName().compareTo(o2.getName());
+				
+			}
+		});
 	}
 
 }

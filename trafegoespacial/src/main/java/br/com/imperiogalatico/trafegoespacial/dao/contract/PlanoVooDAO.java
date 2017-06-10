@@ -7,6 +7,8 @@ import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 public interface PlanoVooDAO {
 
 	void adicionar(PlanoVoo planoDeVoo);
+	
+	void atualizar(PlanoVoo planoDeVoo);
 
 	PlanoVoo buscarPorChave(PlanoVoo chave);
 
