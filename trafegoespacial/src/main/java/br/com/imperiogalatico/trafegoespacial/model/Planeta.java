@@ -15,6 +15,14 @@ public class Planeta implements Serializable {
     public String population;
     public String url;
     
+    public Planeta(String url) {
+		super();
+		this.url = url;
+	}
+	public Planeta() {
+		super();
+	}
+    
 	public String getName() {
 		return name;
 	}

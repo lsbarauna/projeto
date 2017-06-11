@@ -22,5 +22,7 @@ public interface PlanoVooDAO  extends Serializable{
 	void excluir(List<PlanoVoo> listaPlanoSelected);
 	
 	PlanoVoo buscarPorCodigo(PlanoVoo planoVoo);
+	
+	List<PlanoVoo> buscarPorFiltro(PlanoVoo chave);
 
 }

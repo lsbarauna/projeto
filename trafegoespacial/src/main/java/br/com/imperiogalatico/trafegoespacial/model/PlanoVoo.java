@@ -2,14 +2,19 @@ package br.com.imperiogalatico.trafegoespacial.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PlanoVoo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Nave naveEspacial;
 	private Planeta planetaDestino;
 	private List<Tripulante> listaTripulante;
 	private Long codigo;	
-	
+	private Date dataVoo;
 	
 	public PlanoVoo(Long codigo) {
 		super();
@@ -17,6 +22,8 @@ public class PlanoVoo implements Serializable{
 	}
 	public PlanoVoo() {
 		listaTripulante = new ArrayList<Tripulante>();
+		naveEspacial = new Nave();
+		planetaDestino = new Planeta();
 	}
 	public Long getCodigo() {
 		return codigo;
@@ -65,6 +72,12 @@ public class PlanoVoo implements Serializable{
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+	public Date getDataVoo() {
+		return dataVoo;
+	}
+	public void setDataVoo(Date dataVoo) {
+		this.dataVoo = dataVoo;
 	}
 	
 	

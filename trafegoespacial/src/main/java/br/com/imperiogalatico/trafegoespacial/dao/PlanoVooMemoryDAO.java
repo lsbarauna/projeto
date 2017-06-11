@@ -3,12 +3,17 @@ package br.com.imperiogalatico.trafegoespacial.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
-
 import br.com.imperiogalatico.trafegoespacial.dao.contract.PlanoVooDAO;
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 
 public class PlanoVooMemoryDAO implements PlanoVooDAO {
+	
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static long seqPlanoDeVoo;
 	public static List<PlanoVoo> listaPlanoDeVoo = new ArrayList<PlanoVoo>();
 	
@@ -30,6 +35,32 @@ public class PlanoVooMemoryDAO implements PlanoVooDAO {
 	@Override
 	public PlanoVoo buscarPorChave(PlanoVoo chave){
 		return listaPlanoDeVoo.stream().filter(planoDeVoo -> planoDeVoo.equals(chave)).findAny().orElse(null);
+	}
+	
+	/* (non-Javadoc)
+	 * @see br.com.imperiogalatico.trafegoespacial.persistence.PlanoDeVoo#buscarPorChave(br.com.imperiogalatico.trafegoespacial.model.PlanoDeVooDTO)
+	 */
+	@Override
+	public List<PlanoVoo> buscarPorFiltro(PlanoVoo chave){
+		List<PlanoVoo> listaRetorno = new ArrayList<PlanoVoo>();
+		if(listaPlanoDeVoo != null && listaPlanoDeVoo.size() > 0){
+			for(PlanoVoo planoVoo:listaPlanoDeVoo){
+				if(chave.getNaveEspacial() != null && 
+						chave.getNaveEspacial().getUrl() !=null && 
+						!"".equals(chave.getNaveEspacial().getUrl()) &&
+								!planoVoo.getNaveEspacial().equals(chave.getNaveEspacial())){
+					continue;
+				}
+				if(chave.getPlanetaDestino() != null && 
+						chave.getPlanetaDestino().getUrl() !=null && 
+						!"".equals(chave.getPlanetaDestino().getUrl()) &&
+								!planoVoo.getPlanetaDestino().equals(chave.getPlanetaDestino())){
+					continue;
+				}
+				listaRetorno.add(planoVoo);
+			}
+		}
+		return listaRetorno;
 	}
 
 	

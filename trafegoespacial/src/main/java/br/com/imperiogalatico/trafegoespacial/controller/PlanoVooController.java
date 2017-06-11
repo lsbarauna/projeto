@@ -2,6 +2,7 @@ package br.com.imperiogalatico.trafegoespacial.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -52,27 +53,41 @@ public class PlanoVooController implements Serializable {
 	private List<PlanoVoo> listaPlanoSelected;
 	private PlanoVoo planoVoo;
 	private PlanoVoo planoVooDetalhe;
+	private PlanoVoo planoVooFilter;
+	private Date dataVoo;
 	
 	@PostConstruct
 	public void init(){
-		listaPlanoVoo = planoVooBO.buscarTodos();
+		planoVooFilter = new PlanoVoo();
+		listaPlaneta = planetaBO.listar();
+		listaNave = naveBO.listar();	
+		
+	}
+	
+	public String pesquisar(){
+		listaPlanoVoo = planoVooBO.buscarPorFiltro(planoVooFilter);
+		return null;
 	}
 	
 	public void initCadastroPlanoVoo(Long codigo){
 		
 		if(codigo!=null){
-			planoVoo = planoVooBO.buscarPorCodigo(new PlanoVoo(codigo));
-			planeta = planoVoo.getPlanetaDestino();
-			nave = planoVoo.getNaveEspacial();
-			listaTripulanteSelected = planoVoo.getListaTripulante();
-		}else{
-			planoVoo = new PlanoVoo();
+			PlanoVoo planoVooTemp = planoVooBO.buscarPorCodigo(new PlanoVoo(codigo));
+			planeta = new Planeta(planoVooTemp.getPlanetaDestino().getUrl());
+			nave = new Nave(planoVooTemp.getNaveEspacial().getUrl());
+			dataVoo= planoVooTemp.getDataVoo();
+			listaTripulanteSelected = planoVooTemp.getListaTripulante();
+		}else{			
 			nave = new Nave();
 			planeta = new Planeta();
+			dataVoo= new Date();
+		}
+		planoVoo = new PlanoVoo();
+		if(codigo != null && codigo.longValue() != 0){
+			planoVoo.setCodigo(codigo);
 		}
 		
-		listaPlaneta = planetaBO.listar();
-		listaNave = naveBO.listar();		
+			
 		listaTripulante = tripulanteBO.listar();
 	}
 
@@ -104,9 +119,12 @@ public class PlanoVooController implements Serializable {
 		this.planoVoo = planoVoo;
 	}
 
-	public String detalhe() {
-		System.out.println(planoVooDetalhe);
-		return null;
+	public PlanoVoo getPlanoVooFilter() {
+		return planoVooFilter;
+	}
+
+	public void setPlanoVooFilter(PlanoVoo planoVooFilter) {
+		this.planoVooFilter = planoVooFilter;
 	}
 	public String salvar() {
 		try{
@@ -120,6 +138,7 @@ public class PlanoVooController implements Serializable {
 			Nave lNave = naveBO.buscarPorUrl(nave);
 			planoVoo.setNaveEspacial(lNave);
 			planoVoo.setPlanetaDestino(lPlaneta);
+			planoVoo.setDataVoo(dataVoo);
 			if(listaTripulanteSelected != null && listaTripulanteSelected.size() > 0){
 				for(Tripulante tripulante : listaTripulanteSelected){
 					tripulante = tripulanteBO.buscarPorUrl(tripulante);
@@ -163,7 +182,7 @@ public class PlanoVooController implements Serializable {
 			tratarExcessao(e);
 			
 		}		
-		return null;
+		return pesquisar();
 	}
 	
 	public PlanoVoo getPlanoVooDetalhe() {
@@ -196,6 +215,14 @@ public class PlanoVooController implements Serializable {
 
 	public List<Tripulante> getListaTripulante() {
 		return listaTripulante;
+	}
+
+	public Date getDataVoo() {
+		return dataVoo;
+	}
+
+	public void setDataVoo(Date dataVoo) {
+		this.dataVoo = dataVoo;
 	}
 
 	public void setListaTripulante(List<Tripulante> listaTripulante) {

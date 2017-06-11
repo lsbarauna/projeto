@@ -11,4 +11,5 @@ public interface PlanoVooBO extends Serializable{
 	public List<PlanoVoo> buscarTodos();
 	public void excluir(List<PlanoVoo> listaPlanoSelected)  throws Exception;
 	public PlanoVoo buscarPorCodigo(PlanoVoo planoVoo);
+	public List<PlanoVoo> buscarPorFiltro(PlanoVoo chave);
 }

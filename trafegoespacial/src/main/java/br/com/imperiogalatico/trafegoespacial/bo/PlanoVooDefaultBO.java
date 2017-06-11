@@ -1,5 +1,6 @@
 package br.com.imperiogalatico.trafegoespacial.bo;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -48,6 +49,10 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 			throw new ApplicationException("Favor informar pelo menos 1 Tripulante!");
 		}
 		
+		if(planoVoo.getDataVoo() == null ){
+			throw new ApplicationException("Favor informar data e horário do voo!");
+		}
+		
 	}
 	
 	public void validacaoRegraDeNegocio(PlanoVoo planoVoo) throws ApplicationException{	
@@ -57,7 +62,9 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		}
 		
 		PlanoVoo planoAnterior = buscarAnterior(planoVoo);
-		if(planoAnterior != null && planoAnterior.getPlanetaDestino().equals(planoVoo.getPlanetaDestino())){
+		if(planoAnterior != null && 
+				!planoAnterior.equals(planoVoo) && 
+				planoAnterior.getPlanetaDestino().equals(planoVoo.getPlanetaDestino())){
 			throw new ApplicationException("O Planeta destino não pode ser o mesmo que o voo anterior!");
 		}
 	}
@@ -66,6 +73,7 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		PlanoVoo planoAnterior = null;
 		
 		List<PlanoVoo> listaPlanos = buscarTodos();
+		ordernar(listaPlanos);
 		if(listaPlanos !=null && listaPlanos.size() >0){
 			int posicao = listaPlanos.indexOf(planoVoo) ;
 			if(posicao > 0){
@@ -77,15 +85,7 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		return planoAnterior;
 	}
 	
-	public void buscarUltimoPlanoDeVoo(PlanoVoo planoVoo) {
-		if(planoVoo.getCodigo() == null){
-			List<PlanoVoo> lista = buscarTodos();
-			if(lista!=null && lista.size() > 0){
-				
-			}
-		}
-		
-	}
+	
 	public PlanoVooDAO getPlanoVooDAO() {
 		return planoVooDAO;
 	}
@@ -97,6 +97,23 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 	@Override
 	public List<PlanoVoo> buscarTodos() {
 		return planoVooDAO.buscarTodos();
+	}
+	
+	@Override
+	public List<PlanoVoo> buscarPorFiltro(PlanoVoo chave){
+		List<PlanoVoo> lista = planoVooDAO.buscarPorFiltro(chave);
+		ordernar(lista);
+		return lista;
+	}
+	
+	public void ordernar(List<PlanoVoo> lista) {
+		lista.sort(new Comparator<PlanoVoo>() {
+			@Override
+			public int compare(PlanoVoo o1, PlanoVoo o2) {
+				return o1.getDataVoo().compareTo(o2.getDataVoo());
+				
+			}
+		});
 	}
 
 	@Override
