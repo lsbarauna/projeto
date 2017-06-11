@@ -3,7 +3,6 @@ package br.com.imperiogalatico.trafegoespacial.bo;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import br.com.imperiogalatico.trafegoespacial.bo.contract.SwapiBO;
 import br.com.imperiogalatico.trafegoespacial.model.Nave;

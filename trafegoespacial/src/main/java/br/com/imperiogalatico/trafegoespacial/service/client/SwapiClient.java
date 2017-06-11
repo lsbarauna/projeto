@@ -18,13 +18,15 @@ import br.com.imperiogalatico.trafegoespacial.model.Tripulante;
 
 public class SwapiClient {
 
-	
-	public List<Planeta> listarPlaneta(String url) {
-
+	private HttpHeaders getHttpHeaders(){
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.set("User-Agent", "JAVA-APPLICATION");
-
+		return headers;
+	}
+	public List<Planeta> listarPlaneta(String url) {
+		
+		HttpHeaders headers = getHttpHeaders();
 		RestTemplate restTemplate = new RestTemplate();
 		
 		 ResponseEntity<Models<Planeta>> res = restTemplate.exchange(
@@ -37,9 +39,7 @@ public class SwapiClient {
 	}
 
 	public List<Tripulante> listarTripulante(String url) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.set("User-Agent", "JAVA-APPLICATION");
+		HttpHeaders headers = getHttpHeaders();
 
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -55,9 +55,7 @@ public class SwapiClient {
 
 	public List<Nave> listarNave(String url) {
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.set("User-Agent", "JAVA-APPLICATION");
+		HttpHeaders headers = getHttpHeaders();
 
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -72,9 +70,7 @@ public class SwapiClient {
 	
 	public Nave buscarNave(String url) {
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.set("User-Agent", "JAVA-APPLICATION");
+		HttpHeaders headers = getHttpHeaders();
 
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -89,10 +85,7 @@ public class SwapiClient {
 	
 	public Planeta buscarPlaneta(String url) {
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.set("User-Agent", "JAVA-APPLICATION");
-
+		HttpHeaders headers = getHttpHeaders();
 		RestTemplate restTemplate = new RestTemplate();
 		
 		 ResponseEntity<Planeta> res = restTemplate.exchange(
@@ -105,9 +98,7 @@ public class SwapiClient {
 	}
 	
 	public Tripulante buscarTripulante(String url) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.set("User-Agent", "JAVA-APPLICATION");
+		HttpHeaders headers = getHttpHeaders();
 
 		RestTemplate restTemplate = new RestTemplate();
 		
