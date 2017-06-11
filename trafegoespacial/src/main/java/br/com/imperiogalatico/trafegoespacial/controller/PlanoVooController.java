@@ -53,24 +53,26 @@ public class PlanoVooController implements Serializable {
 	private PlanoVoo planoVooDetalhe;
 	
 	@PostConstruct
-	public void iniciarCombos(){
+	public void init(){
+		listaPlanoVoo = planoVooBO.buscarTodos();
+	}
+	
+	public void initCadastroPlanoVoo(Long codigo){
 		
-		nave = new Nave();
-		planeta = new Planeta();
-		planoVoo = planoVooBO.buscarPorCodigo(new PlanoVoo(2L));
-		if(planoVoo == null){
-			planoVoo = new PlanoVoo();
-		}else{
+		if(codigo!=null){
+			planoVoo = planoVooBO.buscarPorCodigo(new PlanoVoo(codigo));
 			planeta = planoVoo.getPlanetaDestino();
 			nave = planoVoo.getNaveEspacial();
 			listaTripulanteSelected = planoVoo.getListaTripulante();
+		}else{
+			planoVoo = new PlanoVoo();
+			nave = new Nave();
+			planeta = new Planeta();
 		}
-		
 		
 		listaPlaneta = planetaBO.listar();
 		listaNave = naveBO.listar();		
 		listaTripulante = tripulanteBO.listar();
-		listaPlanoVoo = planoVooBO.buscarTodos();
 	}
 
 	public List<PlanoVoo> getListaPlanoSelected() {
@@ -147,8 +149,8 @@ public class PlanoVooController implements Serializable {
 		this.planoVooDetalhe = planoVooDetalhe;
 	}
 
-	public String editar() {
-		return "cadastroPlanoVoo";
+	public String editar(Long codigo) {
+		return "cadastroPlanoVoo?faces-redirect=true&codigo="+codigo;
 	}
 	
 	public String novo() {
@@ -167,19 +169,13 @@ public class PlanoVooController implements Serializable {
 		return nave;
 	}
 
-
-
 	public List<Tripulante> getListaTripulante() {
 		return listaTripulante;
 	}
 
-
-
 	public void setListaTripulante(List<Tripulante> listaTripulante) {
 		this.listaTripulante = listaTripulante;
 	}
-
-
 
 	public void setNave(Nave nave) {
 		this.nave = nave;

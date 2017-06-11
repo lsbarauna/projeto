@@ -6,6 +6,10 @@
 	template="/WEB-INF/templates/Layout.xhtml">
 
 	<ui:define name="content">
+		 <f:metadata>
+			<f:event type="preRenderView" 	listener="#{planoVooController.initCadastroPlanoVoo(param['codigo'])}"  />
+		</f:metadata>
+	
 		<h1 class="aw-page-title">Cadastro de Plano de Voo</h1>
 
 		<h:form id="form">
