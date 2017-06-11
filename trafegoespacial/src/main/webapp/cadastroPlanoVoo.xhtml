@@ -57,13 +57,13 @@
 					    
 					</p:dataTable>
 				</h:panelGrid>
-
+			<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
 			<p:commandButton value="Salvar" process="@this,@form,form:planeta"
 				action="#{planoVooController.salvar}" icon="ui-icon-check" />
 				
 				<p:commandButton value="Voltar" 
 				action="manterPlanoVoo" icon="ui-icon-arrowrefresh-1-w" />
-
+			</h:panelGrid> 
 		</h:form>
 	</ui:define>
 

@@ -156,8 +156,13 @@ public class PlanoVooController implements Serializable {
 	
 	
 	public String excluir() {
-		planoVooBO.excluir(listaPlanoSelected);
-		saveMessage("registro(s) excluído(s) com sucesso!");
+		try{
+			planoVooBO.excluir(listaPlanoSelected);
+			saveMessage("registro(s) excluído(s) com sucesso!");
+		}catch (Exception e) {
+			tratarExcessao(e);
+			
+		}		
 		return null;
 	}
 	

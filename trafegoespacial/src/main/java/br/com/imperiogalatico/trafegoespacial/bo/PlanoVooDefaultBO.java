@@ -23,7 +23,7 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 	}
 
 	@Override
-	public void salvar(PlanoVoo planoVoo) throws ApplicationException {
+	public void salvar(PlanoVoo planoVoo) throws Exception {
 		validacao(planoVoo);
 		if(planoVoo != null && planoVoo.getCodigo() != null){
 			planoVooDAO.atualizar(planoVoo); 
@@ -33,11 +33,11 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		
 	}
 	
-	public void validacao(PlanoVoo planoVoo) throws ApplicationException{
+	public void validacao(PlanoVoo planoVoo) throws Exception{
 		validacaoCamposObrigatorios(planoVoo);
 		validacaoRegraDeNegocio(planoVoo);
 	}
-	public void validacaoCamposObrigatorios(PlanoVoo planoVoo) throws ApplicationException{
+	public void validacaoCamposObrigatorios(PlanoVoo planoVoo) throws Exception{
 		if(planoVoo.getPlanetaDestino() == null){
 			throw new ApplicationException("Favor informar um Planeta!");
 		}
@@ -100,7 +100,10 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 	}
 
 	@Override
-	public void excluir(List<PlanoVoo> listaPlanoSelected) {
+	public void excluir(List<PlanoVoo> listaPlanoSelected) throws Exception {
+		if(listaPlanoSelected == null || listaPlanoSelected.size() == 0){
+			throw new ApplicationException("Esclolha pelo menos um plano de Voo");
+		}
 		planoVooDAO.excluir(listaPlanoSelected);
 		
 	}
