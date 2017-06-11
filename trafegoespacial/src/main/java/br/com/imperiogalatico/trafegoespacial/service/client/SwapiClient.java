@@ -16,6 +16,11 @@ import br.com.imperiogalatico.trafegoespacial.model.Nave;
 import br.com.imperiogalatico.trafegoespacial.model.Planeta;
 import br.com.imperiogalatico.trafegoespacial.model.Tripulante;
 
+/**
+ * Responsável pela comunicação com serviço SWAPI
+ * @author LUIS CARDOSO
+ *
+ */
 public class SwapiClient {
 
 	private HttpHeaders getHttpHeaders(){
@@ -24,6 +29,12 @@ public class SwapiClient {
 		headers.set("User-Agent", "JAVA-APPLICATION");
 		return headers;
 	}
+	
+	/**
+	 * Listagem de Planetas
+	 * @param url Url do serviço
+	 * @return lista de Planetas
+	 */
 	public List<Planeta> listarPlaneta(String url) {
 		
 		HttpHeaders headers = getHttpHeaders();
@@ -38,6 +49,11 @@ public class SwapiClient {
 
 	}
 
+	/**
+	 * Listagem de Tripulantes
+	 * @param url Url do serviço
+	 * @return lista de Tripulante
+	 */
 	public List<Tripulante> listarTripulante(String url) {
 		HttpHeaders headers = getHttpHeaders();
 
@@ -53,6 +69,11 @@ public class SwapiClient {
 
 	}
 
+	/**
+	 * Listagem de Nanes
+	 * @param url Url do serviço
+	 * @return lista de Naves
+	 */
 	public List<Nave> listarNave(String url) {
 
 		HttpHeaders headers = getHttpHeaders();
@@ -68,6 +89,11 @@ public class SwapiClient {
 		return res.getBody().results;
 	}
 	
+	/**
+	 * Busca Nave pelo código (url)
+	 * @param url Url do serviço
+	 * @return Nave solicitada
+	 */
 	public Nave buscarNave(String url) {
 
 		HttpHeaders headers = getHttpHeaders();
@@ -83,6 +109,11 @@ public class SwapiClient {
 		return res.getBody();
 	}
 	
+	/**
+	 * Busca Planeta pelo código (url)
+	 * @param url Url do serviço
+	 * @return Planeta solicitado
+	 */
 	public Planeta buscarPlaneta(String url) {
 
 		HttpHeaders headers = getHttpHeaders();
@@ -97,6 +128,11 @@ public class SwapiClient {
 
 	}
 	
+	/**
+	 * Busca Tripulante pelo código (url)
+	 * @param url Url do serviço
+	 * @return Tripulante solicitado
+	 */
 	public Tripulante buscarTripulante(String url) {
 		HttpHeaders headers = getHttpHeaders();
 

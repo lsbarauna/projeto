@@ -4,14 +4,18 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import br.com.imperiogalatico.trafegoespacial.bo.contract.PlanetaBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.SwapiBO;
+import br.com.imperiogalatico.trafegoespacial.enuns.UrlGeralSwapiEnum;
 import br.com.imperiogalatico.trafegoespacial.model.Planeta;
-import br.com.imperiogalatico.trafegoespacial.util.Constantes;
 
 public class PlanetaDefaultBO implements PlanetaBO{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Inject
 	private SwapiBO swapi;
@@ -22,7 +26,7 @@ public class PlanetaDefaultBO implements PlanetaBO{
 
 	@Override
 	public List<Planeta> listar() {
-		List<Planeta> lista = swapi.listarPlaneta(Constantes.URL_PLANETA);
+		List<Planeta> lista = swapi.listarPlaneta(UrlGeralSwapiEnum.PLANETA.getUrl());
 		ordernar(lista);
 		return lista;
 	}
@@ -36,6 +40,10 @@ public class PlanetaDefaultBO implements PlanetaBO{
 		return planetaRetorno;
 	}
 	
+	/**
+	 * Ordena lista de Planetas
+	 * @param lista ordenada
+	 */
 	public void ordernar(List<Planeta> lista) {
 		lista.sort(new Comparator<Planeta>() {
 			@Override

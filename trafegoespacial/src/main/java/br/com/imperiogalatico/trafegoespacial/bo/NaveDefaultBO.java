@@ -4,22 +4,26 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import br.com.imperiogalatico.trafegoespacial.bo.contract.NaveBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.SwapiBO;
+import br.com.imperiogalatico.trafegoespacial.enuns.UrlGeralSwapiEnum;
 import br.com.imperiogalatico.trafegoespacial.model.Nave;
-import br.com.imperiogalatico.trafegoespacial.util.Constantes;
 
 public class NaveDefaultBO implements NaveBO{
 	
-	@Inject
-	private SwapiBO swapi;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private SwapiBO swapi;	
 
 	@Override
 	public List<Nave> listar() {
-		List<Nave> lista = swapi.listarNave(Constantes.URL_NAVE);
+		List<Nave> lista = swapi.listarNave(UrlGeralSwapiEnum.NAVE.getUrl());
 		ordernar(lista);
 		return  lista;
 	}
@@ -33,6 +37,10 @@ public class NaveDefaultBO implements NaveBO{
 		return naveRetorno;
 	}
 	
+	/**
+	 * Ordena lista de Naves
+	 * @param lista ordenada
+	 */
 	public void ordernar(List<Nave> lista) {
 		lista.sort(new Comparator<Nave>() {
 			@Override

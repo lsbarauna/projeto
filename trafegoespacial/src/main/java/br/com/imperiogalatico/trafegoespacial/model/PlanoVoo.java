@@ -1,10 +1,16 @@
 package br.com.imperiogalatico.trafegoespacial.model;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Entidade básica
+ * @author LUIS CARDOSO
+ *
+ */
 public class PlanoVoo implements Serializable{
 	/**
 	 * 

@@ -6,9 +6,13 @@ import java.util.List;
 import br.com.imperiogalatico.trafegoespacial.dao.contract.PlanoVooDAO;
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 
+/**
+ * Classe concreta responsável por armazenar dados do Plano de Voo, assim como implementar os métodos de persistência
+ * @author LUIS CARDOSO
+ *
+ */
 public class PlanoVooMemoryDAO implements PlanoVooDAO {
-	
-	
+		
 	
 	/**
 	 * 
@@ -80,11 +84,6 @@ public class PlanoVooMemoryDAO implements PlanoVooDAO {
 		}
 		
 	}
-	
-	public PlanoVoo buscarPorCodigo(PlanoVoo chave) {
-		return listaPlanoDeVoo.stream().filter(planoVoo -> planoVoo.equals(chave)).findAny().orElse(null);
-	}
-
 	
 	/* (non-Javadoc)
 	 * @see br.com.imperiogalatico.trafegoespacial.persistence.PlanoDeVoo#limparBase()

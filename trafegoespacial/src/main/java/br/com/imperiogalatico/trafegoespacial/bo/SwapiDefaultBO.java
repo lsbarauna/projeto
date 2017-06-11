@@ -12,6 +12,11 @@ import br.com.imperiogalatico.trafegoespacial.service.client.SwapiClient;
 
 public class SwapiDefaultBO implements SwapiBO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private SwapiClient swapiClient;
 	

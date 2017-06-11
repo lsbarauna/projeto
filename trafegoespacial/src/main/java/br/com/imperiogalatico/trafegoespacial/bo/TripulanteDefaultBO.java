@@ -4,21 +4,24 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import br.com.imperiogalatico.trafegoespacial.bo.contract.SwapiBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.TripulanteBO;
+import br.com.imperiogalatico.trafegoespacial.enuns.UrlGeralSwapiEnum;
 import br.com.imperiogalatico.trafegoespacial.model.Tripulante;
-import br.com.imperiogalatico.trafegoespacial.util.Constantes;
 
 public class TripulanteDefaultBO implements TripulanteBO{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private SwapiBO swapi;
 
 	@Override
 	public List<Tripulante> listar() {
-		List<Tripulante> lista = swapi.listarTripulante(Constantes.URL_TRIPULANTE);
+		List<Tripulante> lista = swapi.listarTripulante(UrlGeralSwapiEnum.TRIPULANTE.getUrl());
 		ordernar(lista);
 		return lista;
 	}
@@ -32,6 +35,10 @@ public class TripulanteDefaultBO implements TripulanteBO{
 		return tripulanteRetorno;
 	}
 	
+	/**
+	 * Ordena lista de tripulantes
+	 * @param lista Lista ordenada
+	 */
 	public void ordernar(List<Tripulante> lista) {
 		lista.sort(new Comparator<Tripulante>() {
 			@Override

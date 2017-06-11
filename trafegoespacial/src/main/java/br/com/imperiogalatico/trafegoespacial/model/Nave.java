@@ -2,6 +2,11 @@ package br.com.imperiogalatico.trafegoespacial.model;
 
 import java.io.Serializable;
 
+/**
+ * Entidade básica
+ * @author LUIS CARDOSO
+ *
+ */
 public class Nave implements Serializable {
 
 	/**
@@ -18,6 +23,13 @@ public class Nave implements Serializable {
 	public Nave(String url) {
 		super();
 		this.url = url;
+	}
+	public Nave(NaveBuilder builder) {
+		
+		this.name = builder.name;
+		this.model = builder.model;
+		this.passengers = builder.passengers;
+		this.url = builder.url;
 	}
 	public Nave() {
 		super();
@@ -69,7 +81,48 @@ public class Nave implements Serializable {
 			return false;
 		return true;
 	}
-		
 	
+	
+	public static  Nave getNave()  
+	{
+	    return new Nave.NaveBuilder().name("Nome 1").model("Modelo 1").passengers(10).url("url 1").build();
+	}
+		
+	@Override
+	public String toString() {
+		return "Nave [name=" + name + ", model=" + model + ", passengers=" + passengers + ", url=" + url + "]";
+	}
+
+	public static class NaveBuilder{
+		public String name;
+		public String model;
+		public Integer passengers;
+		public String url;
+		
+		public NaveBuilder name(String name){
+			this.name = name;
+			return this;
+		}
+		
+		public NaveBuilder model(String model){
+			this.model = model;
+			return this;
+		}
+		
+		public NaveBuilder passengers(Integer passengers){
+			this.passengers = passengers;
+			return this;
+		}
+		
+		public NaveBuilder url(String url){
+			this.url = url;
+			return this;
+		}
+		
+		public Nave build() {
+            return new Nave(this);
+        }
+		
+    }
 	
 }

@@ -2,7 +2,11 @@ package br.com.imperiogalatico.trafegoespacial.model;
 
 import java.io.Serializable;
 
-
+/**
+ * Entidade básica
+ * @author LUIS CARDOSO
+ *
+ */
 public class Tripulante implements Serializable {
 	
     /**

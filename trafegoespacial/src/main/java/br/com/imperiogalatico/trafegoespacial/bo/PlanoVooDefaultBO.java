@@ -10,6 +10,11 @@ import br.com.imperiogalatico.trafegoespacial.dao.contract.PlanoVooDAO;
 import br.com.imperiogalatico.trafegoespacial.exception.ApplicationException;
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
 
+/**
+ * Responsável por toda regra de negócio do plano de Voo
+ * @author LUIS CARDOSO
+ *
+ */
 public class PlanoVooDefaultBO implements PlanoVooBO{
 	
 	/**
@@ -34,10 +39,21 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		
 	}
 	
+	
+	/**
+	 * Valida Todas regras de negócio de Planos de voo
+	 * @param planoVoo Plano de voo a ser validado
+	 * @throws Exception
+	 */
 	public void validacao(PlanoVoo planoVoo) throws Exception{
 		validacaoCamposObrigatorios(planoVoo);
 		validacaoRegraDeNegocio(planoVoo);
 	}
+	/**
+	 * Valida campos obrigatórios de Planos de Voo
+	 * @param planoVoo Plano de voo a ser validado
+	 * @throws Exception
+	 */
 	public void validacaoCamposObrigatorios(PlanoVoo planoVoo) throws Exception{
 		if(planoVoo.getPlanetaDestino() == null){
 			throw new ApplicationException("Favor informar um Planeta!");
@@ -55,7 +71,12 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		
 	}
 	
-	public void validacaoRegraDeNegocio(PlanoVoo planoVoo) throws ApplicationException{	
+	/**
+	 * Valida regras de negócio de Planos de voo
+	 * @param planoVoo Plano de voo a ser validado
+	 * @throws Exception
+	 */
+	public void validacaoRegraDeNegocio(PlanoVoo planoVoo) throws Exception{	
 		
 		if(planoVoo.getListaTripulante().size() > planoVoo.getNaveEspacial().getPassengers().intValue() ){
 			throw new ApplicationException("A quantidade de tripulantes não pode ser maior que a capacidade da Nave.!");
@@ -69,6 +90,11 @@ public class PlanoVooDefaultBO implements PlanoVooBO{
 		}
 	}
 	
+	/**
+	 * Busca o plano de voo anterior ao informado por parâmetro
+	 * @param planoVoo referência
+	 * @return Plano de voo anterior
+	 */
 	public PlanoVoo buscarAnterior(PlanoVoo planoVoo) {
 		PlanoVoo planoAnterior = null;
 		
