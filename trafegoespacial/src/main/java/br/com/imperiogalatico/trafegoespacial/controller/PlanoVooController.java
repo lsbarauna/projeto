@@ -151,7 +151,7 @@ public class PlanoVooController implements Serializable {
     }
 	public void saveMessageErro(String mensagem) {
         FacesContext context = FacesContext.getCurrentInstance();         
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,mensagem,  mensagem) );
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,mensagem,  null) );
     }
 	
 	
