@@ -15,6 +15,7 @@ import br.com.imperiogalatico.trafegoespacial.bo.contract.NaveBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.PlanetaBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.PlanoVooBO;
 import br.com.imperiogalatico.trafegoespacial.bo.contract.TripulanteBO;
+import br.com.imperiogalatico.trafegoespacial.exception.ApplicationException;
 import br.com.imperiogalatico.trafegoespacial.model.Nave;
 import br.com.imperiogalatico.trafegoespacial.model.Planeta;
 import br.com.imperiogalatico.trafegoespacial.model.PlanoVoo;
@@ -108,30 +109,49 @@ public class PlanoVooController implements Serializable {
 		return null;
 	}
 	public String salvar() {
-		if(planoVoo == null || planoVoo.getCodigo() == null){
-			planoVoo = new PlanoVoo();
-		}else{
-			planoVoo.setListaTripulante(new ArrayList<Tripulante>());
-		}
-		
-		Planeta lPlaneta = planetaBO.buscarPorUrl(planeta);
-		Nave lNave = naveBO.buscarPorUrl(nave);
-		planoVoo.setNaveEspacial(lNave);
-		planoVoo.setPlanetaDestino(lPlaneta);
-		if(listaTripulanteSelected != null && listaTripulanteSelected.size() > 0){
-			for(Tripulante tripulante : listaTripulanteSelected){
-				tripulante = tripulanteBO.buscarPorUrl(tripulante);
-				planoVoo.getListaTripulante().add(tripulante);
+		try{
+			if(planoVoo == null || planoVoo.getCodigo() == null){
+				planoVoo = new PlanoVoo();
+			}else{
+				planoVoo.setListaTripulante(new ArrayList<Tripulante>());
 			}
+			
+			Planeta lPlaneta = planetaBO.buscarPorUrl(planeta);
+			Nave lNave = naveBO.buscarPorUrl(nave);
+			planoVoo.setNaveEspacial(lNave);
+			planoVoo.setPlanetaDestino(lPlaneta);
+			if(listaTripulanteSelected != null && listaTripulanteSelected.size() > 0){
+				for(Tripulante tripulante : listaTripulanteSelected){
+					tripulante = tripulanteBO.buscarPorUrl(tripulante);
+					planoVoo.getListaTripulante().add(tripulante);
+				}
+			}
+			
+			planoVooBO.salvar(planoVoo);
+			saveMessage("registro cadastrado com sucesso!");
+		}catch (Exception e) {
+			tratarExcessao(e);
+			return null;
 		}
 		
-		planoVooBO.salvar(planoVoo);
-		saveMessage("registro cadastrado com sucesso!");
 		return "manterPlanoVoo";
 	}
+	
+	public void tratarExcessao(Exception exception){
+		if(exception instanceof ApplicationException){
+			saveMessageErro(exception.getMessage());
+		}else{
+			saveMessageErro("Erro inesperado, favor entrar em contato com administrador");
+		}
+	}
+	
 	public void saveMessage(String mensagem) {
         FacesContext context = FacesContext.getCurrentInstance();         
         context.addMessage(null, new FacesMessage("Sucesso",  mensagem) );
+    }
+	public void saveMessageErro(String mensagem) {
+        FacesContext context = FacesContext.getCurrentInstance();         
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,mensagem,  mensagem) );
     }
 	
 	
